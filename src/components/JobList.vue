@@ -2,7 +2,7 @@
   <div>
     <h3>3D Print Jobs</h3>
     <ul>
-      <Job v-for="job in jobs" :job="job" />
+      <Job v-for="job in jobs" :job="job" :key="job.id" />
     </ul>
   </div>
 </template>
@@ -21,4 +21,11 @@ export default {
   }
 }
 </script>
+
+<style>
+ul {
+  list-style: none;
+}
+</style>
+
 
