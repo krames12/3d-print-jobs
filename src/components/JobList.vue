@@ -3,56 +3,35 @@
     <h3>3D Print Jobs</h3>
     <ul>
       <Job v-for="job in jobs" :job="job" :key="job.id" @delete="deleteJob" />
-      <div>
-        <label for="newName">Name</label>
-        <input type="text" name="newName" v-model="newPrintForm.name">
-      </div>
-      <div>
-        <label for="newQty">Quantity</label>
-        <input type="text" name="newQty" v-model="newPrintForm.qty">
-      </div>
-      <div>
-        <label for="newColor">Color</label>
-        <input type="text" name="newColor" v-model="newPrintForm.color">
-      </div>
-      <button @click="addJob">Click to add generic job</button>
     </ul>
+    <NewJobForm @add-new-job="addJob" />
   </div>
 </template>
 
 <script>
 import Job from '@/components/Job.vue'
+import NewJobForm from '@/components/NewJobForm.vue'
 import jobs from '@/assets/jobs.js'
 
 export default {
   name: 'JobList',
   components: {
-    Job
+    Job,
+    NewJobForm
   },
   data() {
     return {
       jobs,
-      newPrintForm: {
-        name: '',
-        qty: 0,
-        color: '',
-      }
     }
   },
   methods: {
-    addJob() {
+    addJob(formData) {
       this.jobs.push({
-        ...this.newPrintForm,
+        ...formData,
         id: Date.now(),
         completed: 0,
 
       });
-
-      this.newPrintForm = {
-        name: '',
-        qty: 0,
-        color: '',
-      }
     },
 
     deleteJob(jobId) {
