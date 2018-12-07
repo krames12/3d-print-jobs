@@ -3,6 +3,19 @@
     <h3>3D Print Jobs</h3>
     <ul>
       <Job v-for="job in jobs" :job="job" :key="job.id" />
+      <div>
+        <label for="newName">Name</label>
+        <input type="text" name="newName" v-model="newPrintForm.name">
+      </div>
+      <div>
+        <label for="newQty">Quantity</label>
+        <input type="text" name="newQty" v-model="newPrintForm.qty">
+      </div>
+      <div>
+        <label for="newColor">Color</label>
+        <input type="text" name="newColor" v-model="newPrintForm.color">
+      </div>
+      <button @click="addJob">Click to add generic job</button>
     </ul>
   </div>
 </template>
@@ -17,7 +30,30 @@ export default {
     Job
   },
   data() {
-    return { jobs }
+    return {
+      jobs,
+      newPrintForm: {
+        name: '',
+        qty: 0,
+        color: '',
+      }
+    }
+  },
+  methods: {
+    addJob() {
+      this.jobs.push({
+        ...this.newPrintForm,
+        id: Date.now(),
+        completed: 0,
+
+      });
+
+      this.newPrintForm = {
+        name: '',
+        qty: 0,
+        color: '',
+      }
+    }
   }
 }
 </script>
@@ -25,6 +61,10 @@ export default {
 <style>
 ul {
   list-style: none;
+}
+
+label {
+  display: block;
 }
 </style>
 
