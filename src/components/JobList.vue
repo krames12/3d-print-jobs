@@ -2,7 +2,7 @@
   <div>
     <h3>3D Print Jobs</h3>
     <ul>
-      <Job v-for="job in jobs" :job="job" :key="job.id" />
+      <Job v-for="job in jobs" :job="job" :key="job.id" @delete="deleteJob" />
       <div>
         <label for="newName">Name</label>
         <input type="text" name="newName" v-model="newPrintForm.name">
@@ -53,6 +53,12 @@ export default {
         qty: 0,
         color: '',
       }
+    },
+
+    deleteJob(jobId) {
+      this.jobs = this.jobs.filter( job => {
+        return job.id !== jobId;
+      });
     }
   }
 }
