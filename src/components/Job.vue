@@ -1,7 +1,10 @@
 <template>
-  <li class="job">
-    <p class="job-description">{{ job.name }} - {{ job.qty }}</p>
-    <button class="button-delete-job" @click="handleDelete">
+  <li class="job flex justify-between  my-5">
+    <p class="self-center">{{ job.name }} - {{ job.qty }}</p>
+    <button
+      class="cursor-pointer text-grey-darkest hover:text-grey-dark font-bold py-2 px-4 rounded"
+      @click="handleDelete"
+    >
       <i class="icon far fa-trash-alt"></i>
     </button>
   </li>
@@ -20,18 +23,3 @@ export default {
   }
 }
 </script>
-<style>
-.job {
-  display: flex;
-  justify-content: space-between;
-}
-
-.button-delete-job {
-
-}
-
-.job-description {
-  display: inline-block;
-  margin: 5px;
-}
-</style>

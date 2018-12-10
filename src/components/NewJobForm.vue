@@ -12,7 +12,10 @@
       <label for="newColor">Color</label>
       <input type="text" name="newColor" v-model="newPrintForm.color">
     </fieldset>
-    <button type="submit">Click to add generic job</button>
+    <button
+      type="submit"
+      class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+    >Click to add generic job</button>
   </form>
 </template>
 
