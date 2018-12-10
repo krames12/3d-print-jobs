@@ -1,7 +1,9 @@
 <template>
   <li class="job">
-    <p>{{ job.name }} - {{ job.qty }}</p>
-    <button @click="handleDelete">Delete me!!!</button>
+    <p class="job-description">{{ job.name }} - {{ job.qty }}</p>
+    <button class="button-delete-job" @click="handleDelete">
+      <i class="icon far fa-trash-alt"></i>
+    </button>
   </li>
 </template>
 
@@ -18,3 +20,18 @@ export default {
   }
 }
 </script>
+<style>
+.job {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-delete-job {
+
+}
+
+.job-description {
+  display: inline-block;
+  margin: 5px;
+}
+</style>

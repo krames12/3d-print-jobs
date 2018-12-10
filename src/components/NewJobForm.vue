@@ -1,17 +1,17 @@
 <template>
   <form  name="newJobForm" @submit.prevent="handleSubmit" >
-    <div>
+    <fieldset>
       <label for="newName">Name</label>
       <input type="text" name="newName" v-model="newPrintForm.name">
-    </div>
-    <div>
+    </fieldset>
+    <fieldset>
       <label for="newQty">Quantity</label>
       <input type="text" name="newQty" v-model="newPrintForm.qty">
-    </div>
-    <div>
+    </fieldset>
+    <fieldset>
       <label for="newColor">Color</label>
       <input type="text" name="newColor" v-model="newPrintForm.color">
-    </div>
+    </fieldset>
     <button type="submit">Click to add generic job</button>
   </form>
 </template>
@@ -41,3 +41,10 @@ export default {
   }
 }
 </script>
+
+<style>
+fieldset {
+  padding-left: 0;
+  border: none;
+}
+</style>
