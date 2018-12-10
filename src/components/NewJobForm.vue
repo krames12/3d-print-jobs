@@ -1,16 +1,31 @@
 <template>
   <form  name="newJobForm" @submit.prevent="handleSubmit" >
-    <fieldset>
-      <label for="newName">Name</label>
-      <input type="text" name="newName" v-model="newPrintForm.name">
+    <fieldset class="my-5">
+      <label for="newName" class="leading-loose">Name</label>
+      <input
+        type="text"
+        class="border-b border-grey-darkest p-1"
+        name="newName"
+        v-model="newPrintForm.name"
+      >
     </fieldset>
-    <fieldset>
-      <label for="newQty">Quantity</label>
-      <input type="text" name="newQty" v-model="newPrintForm.qty">
+    <fieldset class="my-5">
+      <label for="newQty" class="leading-loose">Quantity</label>
+      <input
+        type="text"
+        class="border-b border-grey-darkest p-1"
+        name="newQty"
+        v-model="newPrintForm.qty"
+      >
     </fieldset>
-    <fieldset>
-      <label for="newColor">Color</label>
-      <input type="text" name="newColor" v-model="newPrintForm.color">
+    <fieldset class="my-5">
+      <label for="newColor" class="leading-loose">Color</label>
+      <input
+        type="text"
+        class="border-b border-grey-darkest p-1"
+        name="newColor"
+        v-model="newPrintForm.color"
+      >
     </fieldset>
     <button
       type="submit"
