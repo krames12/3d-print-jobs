@@ -1,5 +1,5 @@
 <template>
-  <li class="job flex justify-between my-5">
+  <li class="job flex justify-between py-2 my-5 border-b border-grey-dark">
     <p class="self-center w-1/5">{{ job.name }}</p>
     <p class="self-center w-1/5">{{ job.color }}</p>
     <p class="self-center w-1/5">{{ job.qty }}</p>

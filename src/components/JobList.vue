@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <h3>3D Print Jobs</h3>
     <ul class="list-reset my-5">
-      <li class="job flex justify-between my-5">
+      <li class="flex justify-between my-5">
         <p class="self-center w-1/5"><strong>Name</strong></p>
         <p class="self-center w-1/5"><strong>Color</strong></p>
         <p class="self-center w-1/5"><strong>Quantity</strong></p>

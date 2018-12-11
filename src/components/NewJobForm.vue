@@ -1,5 +1,9 @@
 <template>
-  <form class="border-t border-grey-dark py-5"  name="newJobForm" @submit.prevent="handleSubmit" >
+  <form
+    class="py-5 mx-auto my-10 w-1/2"
+    name="newJobForm"
+    @submit.prevent="handleSubmit"
+  >
     <h3>New Print</h3>
     <fieldset class="my-5">
       <label for="newName" class="leading-loose block">Name</label>
