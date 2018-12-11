@@ -1,7 +1,16 @@
 <template>
-  <div>
+  <div class="container mx-auto">
     <h3>3D Print Jobs</h3>
-    <ul>
+    <ul class="list-reset my-5">
+      <li class="job flex justify-between my-5">
+        <p class="self-center w-1/5"><strong>Name</strong></p>
+        <p class="self-center w-1/5"><strong>Color</strong></p>
+        <p class="self-center w-1/5"><strong>Quantity</strong></p>
+        <p class="self-center w-1/5"><strong>Completed</strong></p>
+        <p class="self-center w-1/5 text-right">
+          <strong>Remove</strong>
+        </p>
+      </li>
       <Job v-for="job in jobs" :job="job" :key="job.id" @delete="deleteJob" />
     </ul>
     <NewJobForm @add-new-job="addJob" />
@@ -42,16 +51,4 @@ export default {
   }
 }
 </script>
-
-<style>
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-label {
-  display: block;
-}
-</style>
-
 

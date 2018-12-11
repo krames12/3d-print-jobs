@@ -1,8 +1,14 @@
 <template>
-  <li class="job flex justify-between  my-5">
-    <p class="self-center">{{ job.name }} - {{ job.qty }}</p>
+  <li class="job flex justify-between my-5">
+    <p class="self-center w-1/5">{{ job.name }}</p>
+    <p class="self-center w-1/5">{{ job.color }}</p>
+    <p class="self-center w-1/5">{{ job.qty }}</p>
+    <p class="self-center w-1/5">{{ job.completed }}</p>
     <button
-      class="cursor-pointer text-grey-darkest hover:text-grey-dark font-bold py-2 px-4 rounded"
+      class="
+        cursor-pointer text-grey-darkest
+        hover:text-red-dark font-bold py-2 px-4
+      "
       @click="handleDelete"
     >
       <i class="icon far fa-trash-alt"></i>

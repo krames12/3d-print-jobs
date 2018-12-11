@@ -1,28 +1,29 @@
 <template>
-  <form  name="newJobForm" @submit.prevent="handleSubmit" >
+  <form class="border-t border-grey-dark py-5"  name="newJobForm" @submit.prevent="handleSubmit" >
+    <h3>New Print</h3>
     <fieldset class="my-5">
-      <label for="newName" class="leading-loose">Name</label>
+      <label for="newName" class="leading-loose block">Name</label>
       <input
         type="text"
-        class="border-b border-grey-darkest p-1"
+        class="border-b border-grey-darkest p-1 w-full"
         name="newName"
         v-model="newPrintForm.name"
       >
     </fieldset>
     <fieldset class="my-5">
-      <label for="newQty" class="leading-loose">Quantity</label>
+      <label for="newQty" class="leading-loose block">Quantity</label>
       <input
         type="text"
-        class="border-b border-grey-darkest p-1"
+        class="border-b border-grey-darkest p-1 w-full"
         name="newQty"
         v-model="newPrintForm.qty"
       >
     </fieldset>
     <fieldset class="my-5">
-      <label for="newColor" class="leading-loose">Color</label>
+      <label for="newColor" class="leading-loose block">Color</label>
       <input
         type="text"
-        class="border-b border-grey-darkest p-1"
+        class="border-b border-grey-darkest p-1 w-full"
         name="newColor"
         v-model="newPrintForm.color"
       >
