@@ -11,7 +11,11 @@
           <strong>Remove</strong>
         </p>
       </li>
-      <Job v-for="job in jobs" :job="job" :key="job.id" @delete="deleteJob" />
+      <Job
+        v-for="job in jobs"
+        :job="job" :key="job.id"
+        @delete="deleteJob" @completeJob="completeJob"
+      />
     </ul>
     <NewJobForm @add-new-job="addJob" />
   </div>
@@ -41,6 +45,19 @@ export default {
         completed: 0,
 
       });
+    },
+
+    completeJob(jobId) {
+      this.jobs.map( job => {
+        if(jobId === job.id) {
+          return {
+            qty: job.qty++,
+            ...job,
+          }
+        } else {
+          return job;
+        }
+      })
     },
 
     deleteJob(jobId) {

@@ -2,7 +2,7 @@
   <li class="job flex justify-between py-2 my-5 border-b border-grey-dark">
     <p class="self-center w-1/5">{{ job.name }}</p>
     <p class="self-center w-1/5">{{ job.color }}</p>
-    <p class="self-center w-1/5">{{ job.qty }}</p>
+    <p class="self-center w-1/5">{{ job.qty }} <span  @click="handleUpdate" ><i class="icon fas fa-plus"></i></span> </p>
     <p class="self-center w-1/5">{{ job.completed }}</p>
     <button
       class="
@@ -25,6 +25,10 @@ export default {
   methods: {
     handleDelete() {
       this.$emit('delete', this.job.id);
+    },
+
+    handleUpdate() {
+      this.$emit('completeJob', this.job.id);
     }
   }
 }
