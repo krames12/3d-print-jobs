@@ -2,8 +2,33 @@
   <li class="job flex justify-between py-2 my-5 border-b border-grey-dark">
     <p class="self-center w-1/5">{{ job.name }}</p>
     <p class="self-center w-1/5">{{ job.color }}</p>
-    <p class="self-center w-1/5">{{ job.qty }} <span  @click="handleUpdate" ><i class="icon fas fa-plus"></i></span> </p>
-    <p class="self-center w-1/5">{{ job.completed }}</p>
+    <p class="self-center w-1/5">
+      {{ job.qty }}
+      <span
+        class="cursor-pointer text-grey-darkest hover:text-green-dark"
+        v-if="!job.completed"
+        @click="handleIncrementQty"
+      >
+        <i class="icon fas fa-plus"></i>
+      </span>
+      <span
+        class="cursor-pointer text-grey-darkest hover:text-red-dark"
+        v-if="!job.completed"
+        @click="handleDecrementQty"
+      >
+        <i class="icon fas fa-minus"></i>
+      </span>
+    </p>
+    <p class="self-center w-1/5">
+      {{ job.qtyCompleted }}
+      <span
+        class="cursor-pointer text-grey-darkest hover:text-green-dark"
+        v-if="!job.completed"
+        @click="handleIncrementQtyCompleted"
+      >
+        <i class="icon fas fa-check"></i>
+      </span>
+    </p>
     <button
       class="
         cursor-pointer text-grey-darkest
@@ -27,8 +52,16 @@ export default {
       this.$emit('delete', this.job.id);
     },
 
-    handleUpdate() {
-      this.$emit('completeJob', this.job.id);
+    handleIncrementQty() {
+      this.$emit('incrementQty', this.job.id);
+    },
+
+    handleDecrementQty() {
+      this.$emit('decrementQty', this.job.id);
+    },
+
+    handleIncrementQtyCompleted() {
+      this.$emit('incrementQtyCompleted', this.job.id);
     }
   }
 }

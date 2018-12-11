@@ -24,4 +24,8 @@ export default {
   color: #2c3e50;
   margin: 60px auto 0 auto;
 }
+
+.icon {
+  margin: 5px;
+}
 </style>

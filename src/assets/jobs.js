@@ -5,7 +5,7 @@ export default [
     qty: 3,
     qtyCompleted: 2,
     color: "red",
-    completed: false,
+    completed: false
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export default [
     qty: 8,
     qtyCompleted: 4,
     color: "black",
-    completed: false,
+    completed: false
   },
   {
     id: 3,
@@ -21,6 +21,6 @@ export default [
     qty: 1,
     qtyCompleted: 0,
     color: "grey",
-    completed: false,
+    completed: false
   }
 ];

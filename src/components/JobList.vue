@@ -14,7 +14,10 @@
       <Job
         v-for="job in jobs"
         :job="job" :key="job.id"
-        @delete="deleteJob" @completeJob="completeJob"
+        @delete="deleteJob"
+        @incrementQty="incrementQty"
+        @decrementQty="decrementQty"
+        @incrementQtyCompleted="incrementQtyCompleted"
       />
     </ul>
     <NewJobForm @add-new-job="addJob" />
@@ -42,16 +45,43 @@ export default {
       this.jobs.push({
         ...formData,
         id: Date.now(),
-        completed: 0,
-
+        qtyCompleted: 0,
+        completed: false,
       });
     },
 
-    completeJob(jobId) {
+    incrementQty(jobId) {
       this.jobs.map( job => {
         if(jobId === job.id) {
           return {
             qty: job.qty++,
+            ...job,
+          }
+        } else {
+          return job;
+        }
+      })
+    },
+
+    decrementQty(jobId) {
+      this.jobs.map( job => {
+        if(jobId === job.id && job.qty > 0) {
+          return {
+            qty: job.qty--,
+            ...job,
+          }
+        } else {
+          return job;
+        }
+      })
+    },
+
+    incrementQtyCompleted(jobId) {
+      this.jobs.map( job => {
+        if(jobId === job.id && job.qtyCompleted < job.qty) {
+          return {
+            qtyCompleted: job.qtyCompleted++,
+            completed: job.qty === job.qtyCompleted,
             ...job,
           }
         } else {
