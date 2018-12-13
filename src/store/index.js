@@ -82,10 +82,8 @@ export default new Vuex.Store({
       });
     },
 
-    deleteJob({ jobs }, jobId) {
-      jobs = jobs.filter(job => {
-        return job.id !== jobId;
-      });
+    deleteJob({ jobs }, currentJob) {
+      jobs.splice(jobs.indexOf(currentJob), 1);
     }
   }
 });

@@ -14,13 +14,8 @@
       <Job
         v-for="job in jobs"
         :job="job" :key="job.id"
-        @delete="deleteJob"
-        @incrementQty="incrementQty"
-        @decrementQty="decrementQty"
-        @incrementQtyCompleted="incrementQtyCompleted"
       />
     </ul>
-    <NewJobForm @add-new-job="addJob" />
   </div>
 </template>
 

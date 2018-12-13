@@ -34,7 +34,7 @@
         cursor-pointer text-grey-darkest
         hover:text-red-dark font-bold py-2 px-4
       "
-      @click="deleteJob(job.id)"
+      @click="deleteJob(job)"
     >
       <i class="icon far fa-trash-alt"></i>
     </button>
