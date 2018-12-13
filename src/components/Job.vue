@@ -7,14 +7,14 @@
       <span
         class="cursor-pointer text-grey-darkest hover:text-green-dark"
         v-if="!job.completed"
-        @click="handleIncrementQty"
+        @click="incrementQty(job.id)"
       >
         <i class="icon fas fa-plus"></i>
       </span>
       <span
         class="cursor-pointer text-grey-darkest hover:text-red-dark"
         v-if="!job.completed"
-        @click="handleDecrementQty"
+        @click="decrementQty(job.id)"
       >
         <i class="icon fas fa-minus"></i>
       </span>
@@ -24,7 +24,7 @@
       <span
         class="cursor-pointer text-grey-darkest hover:text-green-dark"
         v-if="!job.completed"
-        @click="handleIncrementQtyCompleted"
+        @click="incrementQtyCompleted(job.id)"
       >
         <i class="icon fas fa-check"></i>
       </span>
@@ -34,7 +34,7 @@
         cursor-pointer text-grey-darkest
         hover:text-red-dark font-bold py-2 px-4
       "
-      @click="handleDelete"
+      @click="deleteJob(job.id)"
     >
       <i class="icon far fa-trash-alt"></i>
     </button>
@@ -42,27 +42,18 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Job',
   props: {
     job: Object
   },
-  methods: {
-    handleDelete() {
-      this.$emit('delete', this.job.id);
-    },
-
-    handleIncrementQty() {
-      this.$emit('incrementQty', this.job.id);
-    },
-
-    handleDecrementQty() {
-      this.$emit('decrementQty', this.job.id);
-    },
-
-    handleIncrementQtyCompleted() {
-      this.$emit('incrementQtyCompleted', this.job.id);
-    }
-  }
+  methods: mapMutations([
+    'incrementQty',
+    'decrementQty',
+    'incrementQtyCompleted',
+    'deleteJob'
+  ])
 }
 </script>

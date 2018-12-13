@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <JobList />
+    <NewJobForm />
   </div>
 </template>
 
 <script>
+import Vuex from 'vuex'
+
 import JobList from './components/JobList.vue'
+import NewJobForm from './components/NewJobForm.vue'
 
 export default {
   name: 'app',
   components: {
-    JobList
+    JobList,
+    NewJobForm
   }
 }
 </script>
