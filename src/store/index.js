@@ -33,9 +33,10 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    addJob(formData) {
-      this.state.jobs.push({
+    addJob({ jobs }, formData) {
+      jobs.push({
         ...formData,
+        qty: parseInt(formData.qty, 10),
         id: Date.now(),
         qtyCompleted: 0,
         completed: false

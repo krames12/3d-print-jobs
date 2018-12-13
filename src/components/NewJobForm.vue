@@ -2,7 +2,7 @@
   <form
     class="py-5 mx-auto my-10 w-1/2"
     name="newJobForm"
-    @submit.prevent="handleSubmit"
+    @submit.prevent="addJob(newPrintForm)"
   >
     <h3>New Print</h3>
     <fieldset class="my-5">
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: "NewJobForm",
   data() {
@@ -51,17 +53,9 @@ export default {
       },
     }
   },
-  methods: {
-    handleSubmit() {
-      this.$emit('add-new-job', this.newPrintForm);
-
-      this.newPrintForm = {
-        name: '',
-        qty: 0,
-        color: '',
-      }
-    }
-  }
+  methods: mapMutations([
+    'addJob'
+  ])
 }
 </script>
 
