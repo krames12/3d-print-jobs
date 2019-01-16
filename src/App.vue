@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import Vuex from 'vuex'
-
 import JobList from './components/JobList.vue'
 import NewJobForm from './components/NewJobForm.vue'
 

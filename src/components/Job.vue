@@ -54,6 +54,6 @@ export default {
     'decrementQty',
     'incrementQtyCompleted',
     'deleteJob'
-  ])
+  ]),
 }
 </script>

@@ -1,38 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import firebase from "../firebase";
 
 Vue.use(Vuex);
+Vue.use(firebase);
 
 export default new Vuex.Store({
   state: {
-    jobs: [
-      {
-        id: 1,
-        name: "dragon",
-        qty: 3,
-        qtyCompleted: 2,
-        color: "red",
-        completed: false
-      },
-      {
-        id: 2,
-        name: "pi case",
-        qty: 8,
-        qtyCompleted: 4,
-        color: "black",
-        completed: false
-      },
-      {
-        id: 3,
-        name: "mario",
-        qty: 1,
-        qtyCompleted: 0,
-        color: "grey",
-        completed: false
-      }
-    ]
+    jobs: []
   },
   mutations: {
+    setJobs(state, jobs) {
+      state.jobs = jobs;
+    },
     addJob({ jobs }, formData) {
       jobs.push({
         ...formData,
@@ -85,6 +65,14 @@ export default new Vuex.Store({
 
     deleteJob({ jobs }, currentJob) {
       jobs.splice(jobs.indexOf(currentJob), 1);
+    }
+  },
+
+  actions: {
+    fetchJobs({ commit }) {
+      firebase.database.ref("collections").on("value", snapshot => {
+        commit("setJobs", snapshot.val().jobs);
+      });
     }
   }
 });

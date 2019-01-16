@@ -21,19 +21,21 @@
 
 <script>
 import Job from '@/components/Job.vue'
-import NewJobForm from '@/components/NewJobForm.vue'
 
 export default {
   name: 'JobList',
   components: {
     Job,
-    NewJobForm
   },
 
   computed: {
     jobs() {
       return this.$store.state.jobs
     },
+  },
+  mounted: function() {
+    console.log('mounted');
+    this.$store.dispatch('fetchJobs');
   }
 }
 </script>
