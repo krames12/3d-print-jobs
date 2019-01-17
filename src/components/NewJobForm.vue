@@ -35,12 +35,12 @@
     <button
       type="submit"
       class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-    >Click to add generic job</button>
+    >Add New Job</button>
   </form>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: "NewJobForm",
@@ -53,10 +53,12 @@ export default {
       },
     }
   },
-  methods: mapMutations([
+  methods: mapActions([
     'addJob'
-  ])
+  ]),
+
 }
+
 </script>
 
 <style>

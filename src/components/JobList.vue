@@ -34,7 +34,6 @@ export default {
     },
   },
   mounted: function() {
-    console.log('mounted');
     this.$store.dispatch('fetchJobs');
   }
 }

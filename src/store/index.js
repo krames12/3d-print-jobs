@@ -73,6 +73,10 @@ export default new Vuex.Store({
       firebase.database.ref("collections").on("value", snapshot => {
         commit("setJobs", snapshot.val().jobs);
       });
+    },
+
+    addJob({ commit }, formData) {
+      console.log(formData);
     }
   }
 });
