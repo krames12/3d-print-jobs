@@ -7,14 +7,14 @@
       <span
         class="cursor-pointer text-grey-darkest hover:text-green-dark"
         v-if="!job.completed"
-        @click="incrementQty(job.id)"
+        @click="incrementQty(keyProp)"
       >
         <i class="icon fas fa-plus"></i>
       </span>
       <span
         class="cursor-pointer text-grey-darkest hover:text-red-dark"
         v-if="!job.completed"
-        @click="decrementQty(job.id)"
+        @click="decrementQty(keyProp)"
       >
         <i class="icon fas fa-minus"></i>
       </span>
@@ -24,7 +24,7 @@
       <span
         class="cursor-pointer text-grey-darkest hover:text-green-dark"
         v-if="!job.completed"
-        @click="incrementQtyCompleted(job.id)"
+        @click="incrementQtyCompleted(keyProp)"
       >
         <i class="icon fas fa-check"></i>
       </span>

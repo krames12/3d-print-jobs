@@ -92,7 +92,7 @@ export default new Vuex.Store({
       commit("deleteJob", jobKey);
     },
 
-    incrementQty({ commit }) {},
+    incrementQty({ commit }, jobKey) {},
 
     decrementQty({ commit }) {},
 
