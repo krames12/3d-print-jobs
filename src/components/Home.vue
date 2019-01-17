@@ -1,12 +1,20 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+    <div>
+        <JobList />
+        <NewJobForm />
+    </div>
 </template>
 
 <script>
+import JobList from './JobList.vue'
+import NewJobForm from './NewJobForm.vue'
+
 export default {
-  name: 'app',
+  name: 'Home',
+  components: {
+    JobList,
+    NewJobForm
+  }
 }
 </script>
 
