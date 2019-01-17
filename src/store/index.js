@@ -24,55 +24,47 @@ export default new Vuex.Store({
           qtyCompleted: 0,
           completed: false
         })
-        .then(data => console.log("bill added", data))
         .catch(error => console.error("Firebase Error:", error));
     },
 
     incrementQty({ jobs }, jobId) {
-      jobs.map(job => {
-        if (jobId === job.id) {
-          return {
-            qty: job.qty++,
-            ...job
-          };
-        } else {
-          return job;
-        }
-      });
+      jobsRef
+        .child(jobId)
+        .set({
+          qty: jobs[jobId].qty++,
+          ...jobs[jobId]
+        })
+        .catch(error => console.error(`Firebase Error: ${error}`));
     },
 
     decrementQty({ jobs }, jobId) {
-      jobs.map(job => {
-        if (jobId === job.id && job.qty > 0) {
-          return {
-            qty: job.qty--,
-            ...job
-          };
-        } else {
-          return job;
-        }
-      });
+      jobsRef
+        .child(jobId)
+        .set({
+          qty: jobs[jobId].qty > 0 ? jobs[jobId].qty-- : 0,
+          ...jobs[jobId]
+        })
+        .catch(error => console.error(`Firebase Error: ${error}`));
     },
 
     incrementQtyCompleted({ jobs }, jobId) {
-      jobs.map(job => {
-        if (jobId === job.id && job.qtyCompleted < job.qty) {
-          return {
-            qtyCompleted: job.qtyCompleted++,
-            completed: job.qty === job.qtyCompleted,
-            ...job
-          };
-        } else {
-          return job;
-        }
-      });
+      jobsRef
+        .child(jobId)
+        .set({
+          qtyCompleted:
+            jobs[jobId].qtyCompleted < jobs[jobId].qty
+              ? jobs[jobId].qtyCompleted++
+              : jobs[jobId].qtyCompleted,
+          completed: jobs[jobId].qtyCompleted === jobs[jobId].qty,
+          ...jobs[jobId]
+        })
+        .catch(error => console.error(`Firebase Error: ${error}`));
     },
 
     deleteJob({ jobs }, jobKey) {
       jobsRef
         .child(jobKey)
         .remove()
-        .then(() => console.log(`Successfully removed ${jobKey}`))
         .catch(error => console.error(`Firebase Error: ${error}`));
     }
   },
@@ -92,10 +84,16 @@ export default new Vuex.Store({
       commit("deleteJob", jobKey);
     },
 
-    incrementQty({ commit }, jobKey) {},
+    incrementQty({ commit }, jobKey) {
+      commit("incrementQty", jobKey);
+    },
 
-    decrementQty({ commit }) {},
+    decrementQty({ commit }, jobKey) {
+      commit("decrementQty", jobKey);
+    },
 
-    incrementQtyCompleted({ commit }) {}
+    incrementQtyCompleted({ commit }, jobKey) {
+      commit("incrementQtyCompleted", jobKey);
+    }
   }
 });
