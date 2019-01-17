@@ -5,6 +5,8 @@ import firebase from "../firebase";
 Vue.use(Vuex);
 Vue.use(firebase);
 
+let jobsRef = firebase.database.ref("collections/jobs");
+
 export default new Vuex.Store({
   state: {
     jobs: []
@@ -14,13 +16,16 @@ export default new Vuex.Store({
       state.jobs = jobs;
     },
     addJob({ jobs }, formData) {
-      jobs.push({
-        ...formData,
-        qty: parseInt(formData.qty, 10),
-        id: Date.now(),
-        qtyCompleted: 0,
-        completed: false
-      });
+      jobsRef
+        .push({
+          ...formData,
+          qty: parseInt(formData.qty, 10),
+          id: Date.now(),
+          qtyCompleted: 0,
+          completed: false
+        })
+        .then(data => console.log("bill added", data))
+        .catch(error => console.error("Firebase Error:", error));
     },
 
     incrementQty({ jobs }, jobId) {
@@ -63,20 +68,34 @@ export default new Vuex.Store({
       });
     },
 
-    deleteJob({ jobs }, currentJob) {
-      jobs.splice(jobs.indexOf(currentJob), 1);
+    deleteJob({ jobs }, jobKey) {
+      jobsRef
+        .child(jobKey)
+        .remove()
+        .then(() => console.log(`Successfully removed ${jobKey}`))
+        .catch(error => console.error(`Firebase Error: ${error}`));
     }
   },
 
   actions: {
     fetchJobs({ commit }) {
-      firebase.database.ref("collections").on("value", snapshot => {
-        commit("setJobs", snapshot.val().jobs);
+      jobsRef.on("value", snapshot => {
+        commit("setJobs", snapshot.val());
       });
     },
 
     addJob({ commit }, formData) {
-      console.log(formData);
-    }
+      commit("addJob", formData);
+    },
+
+    deleteJob({ commit }, jobKey) {
+      commit("deleteJob", jobKey);
+    },
+
+    incrementQty({ commit }) {},
+
+    decrementQty({ commit }) {},
+
+    incrementQtyCompleted({ commit }) {}
   }
 });

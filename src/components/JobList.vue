@@ -12,8 +12,8 @@
         </p>
       </li>
       <Job
-        v-for="job in jobs"
-        :job="job" :key="job.id"
+        v-for="(job, index) in jobs"
+        :job="job" :key="index" :keyProp="index"
       />
     </ul>
   </div>

@@ -34,7 +34,7 @@
         cursor-pointer text-grey-darkest
         hover:text-red-dark font-bold py-2 px-4
       "
-      @click="deleteJob(job)"
+      @click="deleteJob(keyProp)"
     >
       <i class="icon far fa-trash-alt"></i>
     </button>
@@ -42,14 +42,15 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Job',
   props: {
-    job: Object
+    job: Object,
+    keyProp: String,
   },
-  methods: mapMutations([
+  methods: mapActions([
     'incrementQty',
     'decrementQty',
     'incrementQtyCompleted',
