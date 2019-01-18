@@ -4,8 +4,8 @@
       <li class="flex justify-between my-5">
         <p class="self-center w-1/5"><strong>Name</strong></p>
         <p class="self-center w-1/5"><strong>Color</strong></p>
-        <p class="self-center w-1/5"><strong>Quantity</strong></p>
-        <p class="self-center w-1/5"><strong>Completed</strong></p>
+        <p class="self-center text-center w-1/5"><strong>Quantity</strong></p>
+        <p class="self-center text-center w-1/5"><strong>Completed</strong></p>
         <p class="self-center w-1/5 text-right">
           <strong>Remove</strong>
         </p>
@@ -15,6 +15,7 @@
         :job="job" :key="index" :keyProp="index"
       />
     </ul>
+    <h3 class="text-center py-5" v-if="jobs == null">No jobs to display. Create one below!</h3>
   </div>
 </template>
 

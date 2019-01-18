@@ -4,7 +4,7 @@
     name="newJobForm"
     @submit.prevent="addJob(newPrintForm)"
   >
-    <h3>New Print</h3>
+    <h3>New Job</h3>
     <fieldset class="my-5">
       <label for="newName" class="leading-loose block">Name</label>
       <input
@@ -40,8 +40,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   name: "NewJobForm",
   data() {
@@ -53,9 +51,16 @@ export default {
       },
     }
   },
-  methods: mapActions([
-    'addJob'
-  ]),
+  methods: {
+    addJob: function(newPrintForm) {
+      this.$store.dispatch('addJob', newPrintForm);
+      this.newPrintForm = {
+        name: '',
+        qty: 0,
+        color: '',
+      }
+    }
+  }
 
 }
 

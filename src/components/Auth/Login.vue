@@ -31,6 +31,11 @@
       type="submit"
       class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded"
     >Login</button>
+    <router-link to="/sign-up">
+      <button
+        class="border border-grey-dark hover:bg-grey-dark text-grey-dark hover:text-white font-bold mx-5 py-2 px-4 rounded"
+      >Sign Up</button>
+    </router-link>
   </form>
   </div>
 </template>

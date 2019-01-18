@@ -134,6 +134,13 @@ export default new Vuex.Store({
           router.push({ path: "/" });
         })
         .catch(error => console.error(`Firebase Error: ${error}`));
+    },
+
+    resetUserPassword({ commit }, email) {
+      firebase.auth
+        .sendPasswordResetEmail(email)
+        .then(() => console.log("Password reset email has been sent"))
+        .catch(error => console.error(`Firebase Error: ${error}`));
     }
   }
 });
