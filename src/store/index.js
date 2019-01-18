@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 import router from "../router";
 import firebase from "../firebase";
 
@@ -9,6 +10,7 @@ Vue.use(firebase);
 let jobsRef = firebase.database.ref("collections/jobs");
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     user: null,
     jobs: []
@@ -127,7 +129,10 @@ export default new Vuex.Store({
     logoutUser({ commit }) {
       firebase.auth
         .signOut()
-        .then(commit("setUser", null))
+        .then(() => {
+          commit("setUser", null);
+          router.push({ path: "/" });
+        })
         .catch(error => console.error(`Firebase Error: ${error}`));
     }
   }
