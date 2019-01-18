@@ -34,7 +34,7 @@
     </fieldset>
     <button
       type="submit"
-      class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+      class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded"
     >Add New Job</button>
   </form>
 </template>

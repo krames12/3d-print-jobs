@@ -1,9 +1,55 @@
 <template>
-  <div><h1>Login</h1></div>
+  <div class="login-container">
+    <h1>Login</h1>
+
+    <form
+    class="py-5 mx-auto my-10 w-1/2"
+    name="loginForm"
+    @submit.prevent="loginUser(loginForm)"
+  >
+    <fieldset class="my-5">
+      <label for="email" class="leading-loose block">Email</label>
+      <input
+        type="email"
+        class="border-b border-grey-darkest p-1 w-full"
+        name="email"
+        required
+        v-model="loginForm.email"
+      >
+    </fieldset>
+    <fieldset class="my-5">
+      <label for="password" class="leading-loose block">Password</label>
+      <input
+        type="password"
+        class="border-b border-grey-darkest p-1 w-full"
+        name="password"
+        required
+        v-model="loginForm.password"
+      >
+    </fieldset>
+    <button
+      type="submit"
+      class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded"
+    >Login</button>
+  </form>
+  </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
+  data() {
+    return {
+      loginForm: {
+        email: '',
+        password: '',
+      },
+    }
+  },
+  methods: mapActions([
+    'loginUser'
+  ])
 }
 </script>

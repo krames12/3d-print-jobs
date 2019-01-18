@@ -13,10 +13,7 @@ export default new Vuex.Store({
     jobs: []
   },
   mutations: {
-    setUser(state, user) {
-      state.user = user;
-    },
-
+    // Job related mutations
     setJobs(state, jobs) {
       state.jobs = jobs;
     },
@@ -72,10 +69,16 @@ export default new Vuex.Store({
         .child(jobKey)
         .remove()
         .catch(error => console.error(`Firebase Error: ${error}`));
+    },
+
+    // Auth related mutations
+    setUser(state, user) {
+      state.user = user;
     }
   },
 
   actions: {
+    // Job related actions
     fetchJobs({ commit }) {
       jobsRef.on("value", snapshot => {
         commit("setJobs", snapshot.val());
@@ -100,6 +103,25 @@ export default new Vuex.Store({
 
     incrementQtyCompleted({ commit }, jobKey) {
       commit("incrementQtyCompleted", jobKey);
+    },
+
+    // Auth related actions
+    createNewUser({ commit }, { email, password }) {
+      firebase.auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(user => console.log(`User: ${user}`))
+        .catch(error => console.error(`Firebase Error: ${error}`));
+    },
+
+    loginUser({ commit }, { email, password }) {
+      firebase.auth
+        .signInWithEmailAndPassword(email, password)
+        .then(user => commit("setUser", user))
+        .catch(error => console.error(`Firebase Error: ${error}`));
+    },
+
+    logoutUser({ commit }) {
+      //
     }
   }
 });
