@@ -7,15 +7,19 @@ import firebase from "../firebase";
 Vue.use(Vuex);
 Vue.use(firebase);
 
-let jobsRef = firebase.database.ref("collections/jobs");
-
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     user: null,
+    message: null,
     jobs: []
   },
+
   mutations: {
+    setUpdateMessage(state, status) {
+      state.message = status;
+    },
+
     // Job related mutations
     setJobs(state, jobs) {
       state.jobs = jobs;
@@ -76,7 +80,13 @@ export default new Vuex.Store({
         .ref(`collections/${user.user.uid}/jobs`)
         .child(jobKey)
         .remove()
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .catch(error => {
+          this.setUpdateMessage({
+            status: "error",
+            message: "There was an error resetting your email.",
+            error: error
+          });
+        });
     },
 
     // Auth related mutations
@@ -119,8 +129,14 @@ export default new Vuex.Store({
     createNewUser({ commit }, { email, password }) {
       firebase.auth
         .createUserWithEmailAndPassword(email, password)
-        .then(user => console.log(`User: ${user}`))
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .then(user => commit("setUser", user))
+        .catch(error => {
+          commit("setUpdateMessage", {
+            status: "error",
+            message: "There was an error resetting your email.",
+            error: error
+          });
+        });
     },
 
     loginUser({ commit }, { email, password }) {
@@ -130,7 +146,13 @@ export default new Vuex.Store({
           commit("setUser", user);
           router.push({ path: "/" });
         })
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .catch(error => {
+          commit("setUpdateMessage", {
+            status: "error",
+            message: "There was an error resetting your email.",
+            error: error
+          });
+        });
     },
 
     logoutUser({ commit }) {
@@ -140,14 +162,31 @@ export default new Vuex.Store({
           commit("setUser", null);
           router.push({ path: "/" });
         })
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .catch(error => {
+          commit("setUpdateMessage", {
+            status: "error",
+            message: "There was an error resetting your email.",
+            error: error
+          });
+        });
     },
 
     resetUserPassword({ commit }, email) {
       firebase.auth
         .sendPasswordResetEmail(email)
-        .then(() => console.log("Password reset email has been sent"))
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .then(() =>
+          commit("setUpdateMessage", {
+            status: "success",
+            message: "Password reset has been sent to your email"
+          })
+        )
+        .catch(error => {
+          commit("setUpdateMessage", {
+            status: "error",
+            message: "There was an error resetting your email.",
+            error: error
+          });
+        });
     }
   }
 });
