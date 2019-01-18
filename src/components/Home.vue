@@ -17,7 +17,12 @@ export default {
   components: {
     JobList,
     NewJobForm
-  }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    }
+  },
 }
 </script>
 
