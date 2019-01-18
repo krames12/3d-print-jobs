@@ -9,13 +9,18 @@ let jobsRef = firebase.database.ref("collections/jobs");
 
 export default new Vuex.Store({
   state: {
-    user: {},
+    user: null,
     jobs: []
   },
   mutations: {
+    setUser(state, user) {
+      state.user = user;
+    },
+
     setJobs(state, jobs) {
       state.jobs = jobs;
     },
+
     addJob({ jobs }, formData) {
       jobsRef
         .push({

@@ -1,4 +1,4 @@
-import { initializeApp, database } from "firebase";
+import { initializeApp, database, auth } from "firebase";
 
 // Initialize Firebase
 const config = {
@@ -11,5 +11,6 @@ const config = {
 initializeApp(config);
 
 export default {
-  database: database()
+  database: database(),
+  auth: auth()
 };

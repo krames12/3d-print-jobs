@@ -1,7 +1,10 @@
 <template>
-    <div>
+    <div v-if="user">
         <JobList />
         <NewJobForm />
+    </div>
+    <div class="text-center" v-else>
+      <p>Please log in to see your jobs listing.</p>
     </div>
 </template>
 
