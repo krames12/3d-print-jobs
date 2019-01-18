@@ -21,8 +21,9 @@ export default new Vuex.Store({
       state.jobs = jobs;
     },
 
-    addJob({ jobs }, formData) {
-      jobsRef
+    addJob({ user }, formData) {
+      firebase.database
+        .ref(`collections/${user.user.uid}/jobs`)
         .push({
           ...formData,
           qty: parseInt(formData.qty, 10),
@@ -33,8 +34,9 @@ export default new Vuex.Store({
         .catch(error => console.error("Firebase Error:", error));
     },
 
-    incrementQty({ jobs }, jobId) {
-      jobsRef
+    incrementQty({ user, jobs }, jobId) {
+      firebase.database
+        .ref(`collections/${user.user.uid}/jobs`)
         .child(jobId)
         .set({
           qty: jobs[jobId].qty++,
@@ -43,8 +45,9 @@ export default new Vuex.Store({
         .catch(error => console.error(`Firebase Error: ${error}`));
     },
 
-    decrementQty({ jobs }, jobId) {
-      jobsRef
+    decrementQty({ user, jobs }, jobId) {
+      firebase.database
+        .ref(`collections/${user.user.uid}/jobs`)
         .child(jobId)
         .set({
           qty: jobs[jobId].qty > 0 ? jobs[jobId].qty-- : 0,
@@ -53,8 +56,9 @@ export default new Vuex.Store({
         .catch(error => console.error(`Firebase Error: ${error}`));
     },
 
-    incrementQtyCompleted({ jobs }, jobId) {
-      jobsRef
+    incrementQtyCompleted({ user, jobs }, jobId) {
+      firebase.database
+        .ref(`collections/${user.user.uid}/jobs`)
         .child(jobId)
         .set({
           qtyCompleted:
@@ -67,8 +71,9 @@ export default new Vuex.Store({
         .catch(error => console.error(`Firebase Error: ${error}`));
     },
 
-    deleteJob({ jobs }, jobKey) {
-      jobsRef
+    deleteJob({ user }, jobKey) {
+      firebase.database
+        .ref(`collections/${user.user.uid}/jobs`)
         .child(jobKey)
         .remove()
         .catch(error => console.error(`Firebase Error: ${error}`));
@@ -83,9 +88,11 @@ export default new Vuex.Store({
   actions: {
     // Job related actions
     fetchJobs({ commit }) {
-      jobsRef.on("value", snapshot => {
-        commit("setJobs", snapshot.val());
-      });
+      firebase.database
+        .ref(`collections/${this.state.user.user.uid}/jobs`)
+        .on("value", snapshot => {
+          commit("setJobs", snapshot.val());
+        });
     },
 
     addJob({ commit }, formData) {
