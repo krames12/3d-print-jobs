@@ -3,8 +3,26 @@
         <JobList />
         <NewJobForm />
     </div>
-    <div class="text-center" v-else>
-      <p>Please log in to see your jobs listing.</p>
+    <div class="flex items-center justify-center my-20" v-else>
+      <div>
+        <h3 class="my-10">Please log in to see your jobs listing.</h3>
+        <div class="text-center">
+          <router-link to="/login">
+            <button
+              class="bg-teal-dark hover:bg-teal-darker text-white hover:text-white font-bold mx-5 py-2 px-4 rounded"
+            >
+              Login
+            </button>
+          </router-link>
+          <router-link to="/sign-up">
+            <button
+              class="border border-grey-dark hover:bg-grey-dark text-grey-dark hover:text-white font-bold mx-5 py-2 px-4 rounded"
+            >
+              Sign Up
+            </button>
+          </router-link>
+        </div>
+      </div>
     </div>
 </template>
 
