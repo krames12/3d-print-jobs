@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import JobList from './JobList.vue'
-import NewJobForm from './NewJobForm.vue'
+const JobList = () => import('./JobList.vue');
+const NewJobForm = () => import('./NewJobForm.vue');
 
 export default {
   name: 'Home',

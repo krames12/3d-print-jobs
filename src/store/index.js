@@ -2,7 +2,10 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import router from "../router";
-const firebase = () => import("../firebase");
+let firebase = () =>
+  import("../firebase").then(fb => {
+    firebase = fb.default;
+  });
 
 Vue.use(Vuex);
 Vue.use(firebase);
