@@ -35,7 +35,13 @@ export default new Vuex.Store({
           qtyCompleted: 0,
           completed: false
         })
-        .catch(error => console.error("Firebase Error:", error));
+        .catch(error =>
+          this.setUpdateMessage({
+            status: "error",
+            message: "There was an issue adding a new job.",
+            error: error
+          })
+        );
     },
 
     incrementQty({ user, jobs }, jobId) {
@@ -46,7 +52,13 @@ export default new Vuex.Store({
           qty: jobs[jobId].qty++,
           ...jobs[jobId]
         })
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .catch(error =>
+          this.setUpdateMessage({
+            status: "error",
+            message: "There was an issue adding to the job quantity.",
+            error: error
+          })
+        );
     },
 
     decrementQty({ user, jobs }, jobId) {
@@ -57,7 +69,13 @@ export default new Vuex.Store({
           qty: jobs[jobId].qty > 0 ? jobs[jobId].qty-- : 0,
           ...jobs[jobId]
         })
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .catch(error =>
+          this.setUpdateMessage({
+            status: "error",
+            message: "There was an issue removing the job.",
+            error: error
+          })
+        );
     },
 
     incrementQtyCompleted({ user, jobs }, jobId) {
@@ -72,7 +90,13 @@ export default new Vuex.Store({
           completed: jobs[jobId].qtyCompleted === jobs[jobId].qty,
           ...jobs[jobId]
         })
-        .catch(error => console.error(`Firebase Error: ${error}`));
+        .catch(error =>
+          this.setUpdateMessage({
+            status: "error",
+            message: "There was an issue completing a job.",
+            error: error
+          })
+        );
     },
 
     deleteJob({ user }, jobKey) {
@@ -83,7 +107,7 @@ export default new Vuex.Store({
         .catch(error => {
           this.setUpdateMessage({
             status: "error",
-            message: "There was an error resetting your email.",
+            message: "There was an issue removing the job.",
             error: error
           });
         });
@@ -133,7 +157,7 @@ export default new Vuex.Store({
         .catch(error => {
           commit("setUpdateMessage", {
             status: "error",
-            message: "There was an error resetting your email.",
+            message: "There was an creating your account.",
             error: error
           });
         });
@@ -149,7 +173,7 @@ export default new Vuex.Store({
         .catch(error => {
           commit("setUpdateMessage", {
             status: "error",
-            message: "There was an error resetting your email.",
+            message: "There was an error logging in.",
             error: error
           });
         });
@@ -165,7 +189,7 @@ export default new Vuex.Store({
         .catch(error => {
           commit("setUpdateMessage", {
             status: "error",
-            message: "There was an error resetting your email.",
+            message: "There was an error logging out.",
             error: error
           });
         });
