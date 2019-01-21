@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import router from "../router";
-import firebase from "../firebase";
+const firebase = () => import("../firebase");
 
 Vue.use(Vuex);
 Vue.use(firebase);

@@ -1,8 +1,8 @@
 import VueRouter from "vue-router";
-import Home from "./components/Home.vue";
-import Login from "./components/Auth/Login.vue";
-import SignUp from "./components/Auth/SignUp.vue";
-import Logout from "./components/Auth/Logout.vue";
+const Home = () => import("./components/Home.vue");
+const Login = () => import("./components/Auth/Login.vue");
+const SignUp = () => import("./components/Auth/SignUp.vue");
+const Logout = () => import("./components/Auth/Logout.vue");
 
 export default new VueRouter({
   mode: "history",
