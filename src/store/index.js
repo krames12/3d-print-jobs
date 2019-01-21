@@ -35,13 +35,13 @@ export default new Vuex.Store({
           qtyCompleted: 0,
           completed: false
         })
-        .catch(error =>
-          this.setUpdateMessage({
+        .catch(error => {
+          return {
             status: "error",
             message: "There was an issue adding a new job.",
             error: error
-          })
-        );
+          };
+        });
     },
 
     incrementQty({ user, jobs }, jobId) {
@@ -52,13 +52,13 @@ export default new Vuex.Store({
           qty: jobs[jobId].qty++,
           ...jobs[jobId]
         })
-        .catch(error =>
-          this.setUpdateMessage({
+        .catch(error => {
+          return {
             status: "error",
             message: "There was an issue adding to the job quantity.",
             error: error
-          })
-        );
+          };
+        });
     },
 
     decrementQty({ user, jobs }, jobId) {
@@ -69,13 +69,13 @@ export default new Vuex.Store({
           qty: jobs[jobId].qty > 0 ? jobs[jobId].qty-- : 0,
           ...jobs[jobId]
         })
-        .catch(error =>
-          this.setUpdateMessage({
+        .catch(error => {
+          return {
             status: "error",
             message: "There was an issue removing the job.",
             error: error
-          })
-        );
+          };
+        });
     },
 
     incrementQtyCompleted({ user, jobs }, jobId) {
@@ -90,13 +90,13 @@ export default new Vuex.Store({
           completed: jobs[jobId].qtyCompleted === jobs[jobId].qty,
           ...jobs[jobId]
         })
-        .catch(error =>
-          this.setUpdateMessage({
+        .catch(error => {
+          return {
             status: "error",
-            message: "There was an issue completing a job.",
+            message: "There was an issue completing the job.",
             error: error
-          })
-        );
+          };
+        });
     },
 
     deleteJob({ user }, jobKey) {
@@ -105,11 +105,11 @@ export default new Vuex.Store({
         .child(jobKey)
         .remove()
         .catch(error => {
-          this.setUpdateMessage({
+          return {
             status: "error",
             message: "There was an issue removing the job.",
             error: error
-          });
+          };
         });
     },
 
@@ -130,23 +130,28 @@ export default new Vuex.Store({
     },
 
     addJob({ commit }, formData) {
-      commit("addJob", formData);
+      let status = commit("addJob", formData);
+      commit("setUpdateMessage", status);
     },
 
     deleteJob({ commit }, jobKey) {
-      commit("deleteJob", jobKey);
+      let status = commit("deleteJob", jobKey);
+      commit("setUpdateMessage", status);
     },
 
     incrementQty({ commit }, jobKey) {
-      commit("incrementQty", jobKey);
+      let status = commit("incrementQty", jobKey);
+      commit("setUpdateMessage", status);
     },
 
     decrementQty({ commit }, jobKey) {
-      commit("decrementQty", jobKey);
+      let status = commit("decrementQty", jobKey);
+      commit("setUpdateMessage", status);
     },
 
     incrementQtyCompleted({ commit }, jobKey) {
-      commit("incrementQtyCompleted", jobKey);
+      let status = commit("incrementQtyCompleted", jobKey);
+      commit("setUpdateMessage", status);
     },
 
     // Auth related actions
