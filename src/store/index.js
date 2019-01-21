@@ -27,7 +27,7 @@ export default new Vuex.Store({
 
     addJob({ user }, formData) {
       firebase.database
-        .ref(`collections/${user.user.uid}/jobs`)
+        .ref(`${user.user.uid}/jobs`)
         .push({
           ...formData,
           qty: parseInt(formData.qty, 10),
@@ -46,7 +46,7 @@ export default new Vuex.Store({
 
     incrementQty({ user, jobs }, jobId) {
       firebase.database
-        .ref(`collections/${user.user.uid}/jobs`)
+        .ref(`${user.user.uid}/jobs`)
         .child(jobId)
         .set({
           qty: jobs[jobId].qty++,
@@ -63,7 +63,7 @@ export default new Vuex.Store({
 
     decrementQty({ user, jobs }, jobId) {
       firebase.database
-        .ref(`collections/${user.user.uid}/jobs`)
+        .ref(`${user.user.uid}/jobs`)
         .child(jobId)
         .set({
           qty: jobs[jobId].qty > 0 ? jobs[jobId].qty-- : 0,
@@ -80,7 +80,7 @@ export default new Vuex.Store({
 
     incrementQtyCompleted({ user, jobs }, jobId) {
       firebase.database
-        .ref(`collections/${user.user.uid}/jobs`)
+        .ref(`${user.user.uid}/jobs`)
         .child(jobId)
         .set({
           qtyCompleted:
@@ -101,7 +101,7 @@ export default new Vuex.Store({
 
     deleteJob({ user }, jobKey) {
       firebase.database
-        .ref(`collections/${user.user.uid}/jobs`)
+        .ref(`${user.user.uid}/jobs`)
         .child(jobKey)
         .remove()
         .catch(error => {
@@ -123,7 +123,7 @@ export default new Vuex.Store({
     // Job related actions
     fetchJobs({ commit }) {
       firebase.database
-        .ref(`collections/${this.state.user.user.uid}/jobs`)
+        .ref(`${this.state.user.user.uid}/jobs`)
         .on("value", snapshot => {
           commit("setJobs", snapshot.val());
         });
