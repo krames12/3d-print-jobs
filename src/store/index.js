@@ -125,11 +125,17 @@ export default new Vuex.Store({
   actions: {
     // Job related actions
     fetchJobs({ commit }) {
-      firebase.database
-        .ref(`${this.state.user.user.uid}/jobs`)
-        .on("value", snapshot => {
-          commit("setJobs", snapshot.val());
-        });
+      /* Questionable way to account for users
+       *  already logged in on first page load
+       */
+      import("../firebase").then(fb => {
+        firebase = fb.default;
+        firebase.database
+          .ref(`${this.state.user.user.uid}/jobs`)
+          .on("value", snapshot => {
+            commit("setJobs", snapshot.val());
+          });
+      });
     },
 
     addJob({ commit }, formData) {
