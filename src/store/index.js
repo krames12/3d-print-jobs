@@ -212,15 +212,16 @@ export default new Vuex.Store({
         });
     },
 
-    resetUserPassword({ commit }, email) {
+    resetUserPassword({ commit }, { email }) {
       firebase.auth
         .sendPasswordResetEmail(email)
-        .then(() =>
+        .then(() => {
           commit("setUpdateMessage", {
             status: "success",
             message: "Password reset has been sent to your email"
-          })
-        )
+          });
+          router.push({ path: "/" });
+        })
         .catch(error => {
           commit("setUpdateMessage", {
             status: "error",
