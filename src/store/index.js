@@ -167,7 +167,10 @@ export default new Vuex.Store({
     createNewUser({ commit }, { email, password }) {
       firebase.auth
         .createUserWithEmailAndPassword(email, password)
-        .then(user => commit("setUser", user))
+        .then(user => {
+          commit("setUser", user);
+          router.push({ path: "/" });
+        })
         .catch(error => {
           commit("setUpdateMessage", {
             status: "error",
