@@ -33,8 +33,8 @@ export default {
       return this.$store.state.jobs
     },
   },
-  mounted: function() {
-    this.$store.dispatch('fetchJobs');
+  mounted: async function() {
+    await this.$store.dispatch('fetchJobs');
   }
 }
 </script>
