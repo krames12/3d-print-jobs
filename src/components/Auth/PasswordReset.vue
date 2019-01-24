@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import firebase from '@/firebase.js';
 import { mapActions } from 'vuex'
 
 export default {
@@ -57,20 +58,45 @@ export default {
         email: '',
       },
       resetPasswordForm: {
-        email: this.$route.query.email,
-        token: this.$route.query.token,
+        token: this.$route.query.oobCode,
       },
       verifiedToken: false,
     }
   },
 
-  mounted: async function() {
-    await this.$store.dispatch('verifyPasswordResetCode', this.$route.query.token);
+  methods: {
+    ...mapActions([
+      'resetUserPassword',
+      'handlePasswordReset',
+    ]),
+    
+    verifyToken() {
+      if(this.$route.query.oobCode) {
+        firebase.auth
+            .verifyPasswordResetCode(this.$route.query.oobCode)
+            .then(() => {
+              this.verifiedToken = true;
+            })
+            .catch(error => {
+              this.$store.dispatch("updateMessage", {
+                status: "error",
+                message:
+                  "The reset token provided is invalid. Please try resetting your password again.",
+                error: error
+              });
+              return { verified: false };
+            });
+      }
+    },
+
+    handlePasswordReset() {
+      //
+    }
   },
 
-  methods: mapActions([
-    'resetUserPassword',
-    'handlePasswordReset',
-  ])
+  beforeMount: function() {
+    this.verifyToken()
+  }
+
 }
 </script>

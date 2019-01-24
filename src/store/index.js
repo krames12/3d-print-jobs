@@ -119,14 +119,15 @@ export default new Vuex.Store({
     // Auth related mutations
     setUser(state, user) {
       state.user = user;
-    },
-
-    setVerifiedToken(state, verified) {
-      state.verifiedToken = verified;
     }
   },
 
   actions: {
+    // Message handling
+    updateMessage({ commit }, messageObject) {
+      commit("setUpdateMessage", messageObject);
+    },
+
     // Job related actions
     fetchJobs({ commit }) {
       /* Questionable way to account for users
@@ -233,32 +234,6 @@ export default new Vuex.Store({
             error: error
           });
         });
-    },
-
-    verifyPasswordResetCode({ commit }, token) {
-      if (token) {
-        import("../firebase").then(fb => {
-          firebase = fb.default;
-          firebase.auth
-            .verifyPasswordResetCode(token)
-            .then(() => {
-              commit("setVerifiedToken", true);
-            })
-            .catch(error => {
-              commit("setVerifiedToken", false);
-              commit("setUpdateMessage", {
-                status: "error",
-                message:
-                  "The reset token provided is invalid. Please try resetting your password again.",
-                error: error
-              });
-            });
-        });
-      } else {
-        commit("setVerifiedToken", false);
-      }
-    },
-
-    handlePasswordReset({ dispatch, commit }, { token, email }) {}
+    }
   }
 });
