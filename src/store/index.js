@@ -229,6 +229,8 @@ export default new Vuex.Store({
             error: error
           });
         });
-    }
+    },
+
+    handlePasswordReset({ dispatch, commit }, { token }) {}
   }
 });
