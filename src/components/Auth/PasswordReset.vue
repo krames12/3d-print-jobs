@@ -5,7 +5,7 @@
     <form
     class="py-5 mx-auto my-10 w-1/2"
     name="forgotPasswordForm"
-    v-if="!resetPasswordForm.token"
+    v-if="!verifiedToken"
     @submit.prevent="resetUserPassword(forgotPasswordForm)"
   >
     <fieldset class="my-5">
@@ -59,8 +59,13 @@ export default {
       resetPasswordForm: {
         email: this.$route.query.email,
         token: this.$route.query.token,
-      }
+      },
+      verifiedToken: false,
     }
+  },
+
+  mounted: async function() {
+    await this.$store.dispatch('verifyPasswordResetCode', this.$route.query.token);
   },
 
   methods: mapActions([
