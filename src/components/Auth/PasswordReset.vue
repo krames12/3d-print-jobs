@@ -34,19 +34,23 @@
       <input
         type="password"
         class="border-b border-grey-darkest p-1 w-full"
-        name="new-password"
+        name="newPassword"
         required
-        v-model="resetPasswordForm.password"
+        v-model="resetPasswordForm.newPassword"
       >
-      <input type="hidden" name="email" v-model="resetPasswordForm.email">
       <input type="hidden" name="token" v-model="resetPasswordForm.token">
     </fieldset>
+    <button
+      type="submit"
+      class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded"
+    >Submit</button>
   </form>
   </div>
 </template>
 
 <script>
 import firebase from '@/firebase.js';
+import route from '@/router.js';
 import { mapActions } from 'vuex'
 
 export default {
@@ -58,6 +62,7 @@ export default {
         email: '',
       },
       resetPasswordForm: {
+        newPassword: '',
         token: this.$route.query.oobCode,
       },
       verifiedToken: false,
@@ -67,7 +72,6 @@ export default {
   methods: {
     ...mapActions([
       'resetUserPassword',
-      'handlePasswordReset',
     ]),
     
     verifyToken() {
@@ -89,8 +93,25 @@ export default {
       }
     },
 
-    handlePasswordReset() {
-      //
+    handlePasswordReset({ token, newPassword }) {
+      firebase.auth.confirmPasswordReset(token, newPassword)
+        .then( response => {
+          console.log('wut', response);
+          this.$store.dispatch("updateMessage", {
+              status: "success",
+              message:
+                "You're password has been reset. Please log in.",
+            });
+          router.push({ path: "/login"});
+        })
+        .catch( error => {
+          this.$store.dispatch("updateMessage", {
+            status: "error",
+            message:
+              "There was an issue resetting your password",
+            error: error
+          });
+        });
     }
   },
 
