@@ -50,7 +50,7 @@
 
 <script>
 import firebase from '@/firebase.js';
-import route from '@/router.js';
+import router from '@/router.js';
 import { mapActions } from 'vuex'
 
 export default {
