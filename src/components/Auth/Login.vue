@@ -27,6 +27,11 @@
         v-model="loginForm.password"
       >
     </fieldset>
+    <fieldset class="my-5">
+      <router-link to="/password-reset" class="text-grey-dark hover:text-grey-darker">
+        Forgot your password?
+      </router-link>
+    </fieldset>
     <button
       type="submit"
       class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 rounded"

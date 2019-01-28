@@ -123,6 +123,11 @@ export default new Vuex.Store({
   },
 
   actions: {
+    // Message handling
+    updateMessage({ commit }, messageObject) {
+      commit("setUpdateMessage", messageObject);
+    },
+
     // Job related actions
     fetchJobs({ commit }) {
       /* Questionable way to account for users
@@ -212,19 +217,20 @@ export default new Vuex.Store({
         });
     },
 
-    resetUserPassword({ commit }, email) {
+    resetUserPassword({ commit }, { email }) {
       firebase.auth
         .sendPasswordResetEmail(email)
-        .then(() =>
+        .then(() => {
           commit("setUpdateMessage", {
             status: "success",
             message: "Password reset has been sent to your email"
-          })
-        )
+          });
+          router.push({ path: "/" });
+        })
         .catch(error => {
           commit("setUpdateMessage", {
             status: "error",
-            message: "There was an error resetting your email.",
+            message: "There was an issue resetting your email.",
             error: error
           });
         });

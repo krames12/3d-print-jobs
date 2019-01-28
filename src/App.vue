@@ -14,7 +14,13 @@ export default {
   name: 'app',
   components: {
     Navigation
-  }
+  },
+
+  computed: {
+    message() {
+      return this.$store.state.message
+    },
+  },
 }
 </script>
 
