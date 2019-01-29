@@ -13,6 +13,7 @@
         type="email"
         class="border-b border-grey-darkest p-1 w-full"
         name="email"
+        autofocus
         required
         v-model="loginForm.email"
       >
