@@ -2,6 +2,7 @@
   <div id="app-container">
     <Navigation />
     <div class="content">
+      <Notification v-bind="message" />
       <router-view />
     </div>
   </div>
@@ -9,11 +10,13 @@
 
 <script>
 import Navigation from '@/components/Navigation.vue';
+const Notification = () => import('@/components/Notification.vue');
 
 export default {
   name: 'app',
   components: {
-    Navigation
+    Navigation,
+    Notification
   },
 
   computed: {

@@ -42,8 +42,7 @@ export default new Vuex.Store({
           return {
             status: "error",
             message: "There was an issue adding a new job.",
-            error: error,
-            read: false
+            error: error
           };
         });
     },
@@ -60,8 +59,7 @@ export default new Vuex.Store({
           return {
             status: "error",
             message: "There was an issue adding to the job quantity.",
-            error: error,
-            read: false
+            error: error
           };
         });
     },
@@ -78,8 +76,7 @@ export default new Vuex.Store({
           return {
             status: "error",
             message: "There was an issue removing the job.",
-            error: error,
-            read: false
+            error: error
           };
         });
     },
@@ -100,8 +97,7 @@ export default new Vuex.Store({
           return {
             status: "error",
             message: "There was an issue completing the job.",
-            error: error,
-            read: false
+            error: error
           };
         });
     },
@@ -115,8 +111,7 @@ export default new Vuex.Store({
           return {
             status: "error",
             message: "There was an issue removing the job.",
-            error: error,
-            read: false
+            error: error
           };
         });
     },
@@ -185,8 +180,7 @@ export default new Vuex.Store({
           commit("setUpdateMessage", {
             status: "error",
             message: "There was an creating your account.",
-            error: error,
-            read: false
+            error: error
           });
         });
     },
@@ -202,8 +196,7 @@ export default new Vuex.Store({
           commit("setUpdateMessage", {
             status: "error",
             message: "There was an error logging in.",
-            error: error,
-            read: false
+            error: error
           });
         });
     },
@@ -219,8 +212,7 @@ export default new Vuex.Store({
           commit("setUpdateMessage", {
             status: "error",
             message: "There was an error logging out.",
-            error: error,
-            read: false
+            error: error
           });
         });
     },
@@ -231,8 +223,7 @@ export default new Vuex.Store({
         .then(() => {
           commit("setUpdateMessage", {
             status: "success",
-            message: "Password reset has been sent to your email",
-            read: false
+            message: "Password reset has been sent to your email"
           });
           router.push({ path: "/" });
         })
@@ -240,8 +231,7 @@ export default new Vuex.Store({
           commit("setUpdateMessage", {
             status: "error",
             message: "There was an issue resetting your email.",
-            error: error,
-            read: false
+            error: error
           });
         });
     }

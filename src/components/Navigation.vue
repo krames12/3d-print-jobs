@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="border-b-1 border-grey-lightest">
       <router-link to="/">
         <h1><span class="three-d">3D</span> Jobber</h1>
       </router-link>
@@ -20,7 +20,7 @@ export default {
   computed: {
     user() {
       return this.$store.state.user
-    }
+    },
   },
 }
 </script>
@@ -32,7 +32,7 @@ header {
   display: grid;
   grid-template-columns: 3fr 1fr;
   align-items: center;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   margin-bottom: 3rem;
 }

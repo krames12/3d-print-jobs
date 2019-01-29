@@ -70,7 +70,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
+  ...mapActions([
       'resetUserPassword',
     ]),
     
@@ -86,8 +86,7 @@ export default {
                 status: "error",
                 message:
                   "The reset token provided is invalid. Please try resetting your password again.",
-                error: error,
-                read: false,
+                error: error
               });
               return { verified: false };
             });
@@ -101,8 +100,7 @@ export default {
           this.$store.dispatch("updateMessage", {
               status: "success",
               message:
-                "You're password has been reset. Please log in.",\
-              read: false,
+                "You're password has been reset. Please log in.",
             });
           router.push({ path: "/login"});
         })
@@ -111,8 +109,7 @@ export default {
             status: "error",
             message:
               "There was an issue resetting your password",
-            error: error,
-            read: false,
+            error: error
           });
         });
     }
