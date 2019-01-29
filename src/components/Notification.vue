@@ -12,10 +12,12 @@
 <script>
 export default {
     name: "Notification",
-    data: {
-        notifClasses: 'relative p-3 border pin-r pin-t rounded-l-lg',
-        successClasses: '',
-        errorClasses: '',
+    data() {
+        return {
+            notifClasses: 'relative p-3 border pin-r pin-t rounded-l-lg',
+            successClasses: '',
+            errorClasses: '',
+        }
     },
     props: {
         status: String,
